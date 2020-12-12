@@ -1,2 +1,35 @@
 # TTNMAD_LoRaWAN_Geocaching
 Materiales para crear una actividad de geocaching utilizando la tecnología LoRaWAN y The Things Network
+
+Se esconden nodos numerados que emiten cada 20 segundos y siempre en la misma frecuencia (pueden emitir todos en la misma frecuencia, o distribuirlos por varias frecuencias para reducir el riesgo de colisiones si hay mucho nodos). La carga de pago es indiferente (usaremos el nivel de batería).
+
+Se asigna a cada equipo un gateway monocanal identificado con el número del nodo que tiene que localizar y, obviamente, configurado para recibir en la misma frecuencia y spread factor que ese nodo. El gateway puede alimentarse con un power bank, por ejemplo.
+
+Se instala en el teléfono móvil Android la app TTNMAD LoRaWAN Geocaching. El teléfono móvil deberá disponer de datos.
+
+El equipo selecciona en la app el número del nodo que le haya correspondido localizar. La app mostrará el mapa resaltando la parcela en la que debe localizarlo.
+
+Sobre este mapa se indica la posición del equipo (obtenida a través del sistema de posicionamiento del teléfono móvil).
+
+Adicionalmente, si el gateway del equipo está dentro de la zona de alcance del nodo que tiene que localizar, se indicará en la app con un marcador de color:
+
+- Negro: No está dentro de la zona de alcance.
+- Azul: Dentro de la zona de alcance pero con recepción muy débil.
+- Verde
+- Amarillo
+- Naranja
+- Rojo: Muy próximo al nodo. En este momento la app desvela su posición exacta (latitud y longitud) para que el equipo pueda recuperarlo.
+
+Los nodos envían la información a The Things Network a través de los gateways.
+
+Esta información se recoje desde un flujo Node-RED mediante una suscripción MQTT al topic de uplink de los dispositivos.
+
+En Node-RED, además, se procesa esta información para almacenar en una base de datos Sqlite el timestamp y el RSSI con el que cada gateway va recibiendo los paquetes de su correspondiente nodo.
+
+Cada 10 segundos, la app realiza una petición GET al flujo de Node-RED solicitando el RSSI con el que se ha recibido el último paquete de su correspondiente nodo. Si ese paquete tiene una edad inferior a 20 segundos, se indica con la marca del color correspondiente; en caso contrario se usa la marca de color negro.
+
+Con la idea de que el proyecto sea lo más replicable posible, la app permite configurar el url del servidor Node-RED, y es en el flujo Node-RED donde se configuran todos los parámetros de funcionamiento, como:
+
+- Posición inicial del mapa y coordenadas de los polígos de las parcelas.
+- Posiciones exactas de los nodos.
+- Correspondencia entre RSSI y colores de las marcas.
