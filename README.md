@@ -3,9 +3,9 @@ Materiales para crear una actividad de geocaching utilizando la tecnología LoRa
 
 Se esconden nodos numerados que emiten cada 20 segundos y siempre en la misma frecuencia (pueden emitir todos en la misma frecuencia, o distribuirlos por varias frecuencias para reducir el riesgo de colisiones si hay mucho nodos). La carga de pago es indiferente (usaremos el nivel de batería).
 
-Se asigna a cada equipo un gateway monocanal identificado con el número del nodo que tiene que localizar y, obviamente, configurado para recibir en la misma frecuencia y spread factor que ese nodo. El gateway puede alimentarse con un power bank, por ejemplo.
+Se asigna a cada equipo un gateway monocanal identificado con el número del nodo que tiene que localizar y, obviamente, configurado para recibir en la misma frecuencia y spread factor que ese nodo. Cada gateway va a depender del teléfono móvil del equipo para poder enviar los datos a Internet; el gateway se conecta por WiFi al móvil, que a su vez envía los datos a Internet a tavés de su conexión celular. El gateway puede alimentarse con un power bank, por ejemplo.
 
-Se instala en el teléfono móvil Android la app TTNMAD LoRaWAN Geocaching. El teléfono móvil deberá disponer de datos.
+Se instala en el teléfono móvil Android la app TTNMAD LoRaWAN Geocaching. El teléfono móvil deberá disponer de datos y configuraremos en él un punto de acceso WiFi con el SSID y el password correspondiente al gateway de nuestro equipo.
 
 El equipo selecciona en la app el número del nodo que le haya correspondido localizar. La app mostrará el mapa resaltando la parcela en la que debe localizarlo.
 
