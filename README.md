@@ -24,7 +24,7 @@ Los nodos envían la información a The Things Network a través de los gateways
 
 Esta información se recoje desde un flujo Node-RED mediante una suscripción MQTT al topic de uplink de los dispositivos.
 
-En Node-RED, además, se procesa esta información para almacenar en una base de datos Sqlite el timestamp y el RSSI con el que cada gateway va recibiendo los paquetes de su correspondiente nodo. Para establecer la correspondencia entre nodos y gateways, el nombre del nodo debe coincidir con el del gateway.
+En Node-RED, además, se procesa esta información para almacenar en una base de datos Sqlite el timestamp y el RSSI con el que cada gateway va recibiendo los paquetes de su correspondiente nodo. Para establecer la correspondencia entre nodos y gateways, el nombre del nodo debe coincidir con el id del gateway (por ejemplo: eui-58a0cbfffe8002e1).
 
 Cada 10 segundos, la app realiza una petición GET al flujo de Node-RED solicitando el RSSI con el que se ha recibido el último paquete de su correspondiente nodo. Si ese paquete tiene una edad inferior a 20 segundos, se indica con la marca del color correspondiente; en caso contrario se usa la marca de color negro.
 
