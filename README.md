@@ -13,8 +13,9 @@ Sobre este mapa se indica la posición del equipo (obtenida a través del servic
 
 Adicionalmente, si el gateway del equipo está dentro de la zona de alcance del nodo que tiene que localizar, se indicará en la app con un marcador de color:
 
-- Negro: No está dentro de la zona de alcance.
-- Azul: Dentro de la zona de alcance pero con recepción muy débil.
+- Gris: No está dentro de la zona de alcance.
+- Negro: Dentro de la zona de alcance pero con recepción muy débil.
+- Azul 
 - Verde
 - Amarillo
 - Naranja
