@@ -1,7 +1,7 @@
 # TTNMAD_LoRaWAN_Geocaching
 Materiales para crear una actividad de geocaching utilizando la tecnología LoRaWAN y The Things Network
 
-Se esconden nodos numerados que emiten cada 20 segundos y siempre en la misma frecuencia (pueden emitir todos en la misma frecuencia, o distribuirlos por varias frecuencias para reducir el riesgo de colisiones si hay mucho nodos). La carga de pago es indiferente (usaremos el nivel de batería).
+Se esconden nodos numerados del que emiten cada 13-14 segundos y siempre en la misma frecuencia (pueden emitir todos en la misma frecuencia, o distribuirlos por varias frecuencias para reducir el riesgo de colisiones si hay mucho nodos). La carga de pago es indiferente (usaremos el nivel de batería), pero cada nodo envía por un puerto diferente (este puerto debe coincidir con el número del nodo).
 
 Se asigna a cada equipo un gateway monocanal identificado con el número del nodo que tiene que localizar y, obviamente, configurado para recibir en la misma frecuencia y spread factor que ese nodo. Cada gateway va a depender del teléfono móvil del equipo para poder enviar los datos a Internet; el gateway se conecta por WiFi al móvil, que a su vez envía los datos a Internet a tavés de su conexión celular. El gateway puede alimentarse con un power bank, por ejemplo.
 
@@ -24,9 +24,9 @@ Los nodos envían la información a The Things Network a través de los gateways
 
 Esta información se recoje desde un flujo Node-RED mediante una suscripción MQTT al topic de uplink de los dispositivos.
 
-En Node-RED, además, se procesa esta información para almacenar en una base de datos Sqlite el timestamp y el RSSI con el que cada gateway va recibiendo los paquetes de su correspondiente nodo. Para establecer la correspondencia entre nodos y gateways, el nombre del nodo debe coincidir con el id del gateway (por ejemplo: eui-58a0cbfffe8002e1).
+En Node-RED, además, se procesa esta información para almacenar en una base de datos Sqlite el puerto, el timestamp y el RSSI con el que cada gateway va recibiendo los paquetes de su correspondiente nodo. Para establecer la correspondencia entre nodos y gateways, el nombre del nodo debe coincidir con el id del gateway (por ejemplo: eui-58a0cbfffe8002e1).
 
-Cada 10 segundos, la app realiza una petición GET al flujo de Node-RED solicitando el RSSI con el que se ha recibido el último paquete de su correspondiente nodo. Si ese paquete tiene una edad inferior a 20 segundos, se indica con la marca del color correspondiente; en caso contrario se usa la marca de color negro.
+Cada 15 segundos, la app realiza una petición GET al flujo de Node-RED solicitando el color que debe asignar al marcador.
 
 Con la idea de que el proyecto sea lo más replicable posible, la app permite configurar el url del servidor Node-RED, y es en el flujo Node-RED donde se configuran todos los parámetros de funcionamiento, como:
 
